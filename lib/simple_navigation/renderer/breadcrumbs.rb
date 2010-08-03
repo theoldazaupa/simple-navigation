@@ -16,11 +16,15 @@ module SimpleNavigation
       end
 
       protected
-
+      
+      # def translate_menu(m)
+      #  return m
+      # end
+      
       def a_tags(item_container)
         item_container.items.inject([]) do |list, item|
           if item.selected?
-            list << link_to(html_safe(item.name), item.url, {:method => item.method}.merge(item.html_options.except(:class,:id))) if item.selected?
+            list << link_to(html_safe(item.name[I18n.locale]), item.url, {:method => item.method}.merge(item.html_options.except(:class,:id))) if item.selected?
             if include_sub_navigation?(item)
               list.concat a_tags(item.sub_navigation) 
             end
